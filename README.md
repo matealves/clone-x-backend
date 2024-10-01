@@ -1,4 +1,4 @@
-# X (Twitter) - Frontend
+# X (Twitter) - Backend
 
 ### Clone da rede social "X", antigo Twitter. Backend da aplicação - Parte II / II. 
 
