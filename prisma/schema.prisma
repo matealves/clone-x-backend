@@ -16,6 +16,7 @@ datasource db {
 model User {
   username  String      @id
   email     String      @unique
+  password  String
   name      String
   lastName  String
   avatar    String      @default("default.jpg")

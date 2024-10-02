@@ -2,6 +2,7 @@
 CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "avatar" TEXT NOT NULL DEFAULT 'default.jpg',
