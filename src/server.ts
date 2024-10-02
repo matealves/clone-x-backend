@@ -17,5 +17,5 @@ server.use(express.json());
 server.use(mainRouter);
 
 server.listen(PORT, () => {
-  console.log(`[PORT:${PORT}] \x1b[32mServer running on \x1b[0m${BASE_URL}`);
+  console.log(`✓ Server running on ${BASE_URL}`);
 });

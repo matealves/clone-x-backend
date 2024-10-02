@@ -7,6 +7,7 @@ import {
 } from "../services/user";
 import slug from "slug";
 import { hash } from "bcrypt-ts";
+import { createJWT } from "../utils/jwt";
 
 export const signup = async (req: Request, res: Response) => {
   // validate received data
@@ -53,7 +54,7 @@ export const signup = async (req: Request, res: Response) => {
   });
 
   // create token
-  const token = "";
+  const token = createJWT(userSlug);
 
   // returns the result (token, user)
   res.status(201).json({
