@@ -10,7 +10,7 @@ mainRouter.get("/ping", pingController.ping);
 
 // auth
 mainRouter.post("/auth/signup", authController.signup);
-// mainRouter.post("/auth/signin");
+mainRouter.post("/auth/signin", authController.signin);
 
 // tweet
 // mainRouter.post("/tweet");
