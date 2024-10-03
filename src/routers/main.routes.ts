@@ -14,7 +14,7 @@ mainRouter.post("/auth/signup", authController.signup);
 mainRouter.post("/auth/signin", authController.signin);
 
 // tweet
-// mainRouter.post("/tweet");
+mainRouter.post("/tweet");
 // mainRouter.get("/tweet/:id");
 // mainRouter.get("/tweet/:id/answers");
 // mainRouter.post("/tweet/:id/like");

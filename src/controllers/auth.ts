@@ -12,18 +12,13 @@ import { signinSchema } from "../schemas/signin";
 
 export const signup: RequestHandler = async (req, res) => {
   const safeData = signupSchema.safeParse(req.body);
-  if (!safeData.success) {
-    res.json({ error: safeData.error.flatten().fieldErrors });
-    return;
-  }
+  if (!safeData.success)
+    return res.json({ error: safeData.error.flatten().fieldErrors });
 
   const { name, lastName, email, password } = safeData.data;
 
   const hasEmail = await findUserByEmail(email);
-  if (hasEmail) {
-    res.json({ error: "E-mail já existe" });
-    return;
-  }
+  if (hasEmail) return res.json({ error: "E-mail já existe" });
 
   let genSlug = true;
   let userSlug = slug(`${name} ${lastName}`);
@@ -64,24 +59,16 @@ export const signup: RequestHandler = async (req, res) => {
 
 export const signin: RequestHandler = async (req, res) => {
   const safeData = signinSchema.safeParse(req.body);
-  if (!safeData.success) {
-    res.json({ error: safeData.error.flatten().fieldErrors });
-    return;
-  }
+  if (!safeData.success)
+    return res.json({ error: safeData.error.flatten().fieldErrors });
 
   const { email, password } = safeData.data;
 
   const user = await findUserByEmail(email);
-  if (!user) {
-    res.status(401).json({ error: "Acesso negado!" });
-    return;
-  }
+  if (!user) return res.status(401).json({ error: "Acesso negado!" });
 
   const verifyPassword = await compare(password, user.password);
-  if (!verifyPassword) {
-    res.status(401).json({ error: "Acesso negado!" });
-    return;
-  }
+  if (!verifyPassword) return res.status(401).json({ error: "Acesso negado!" });
 
   const token = createJWT(user.username);
 
