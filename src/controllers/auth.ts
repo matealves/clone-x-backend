@@ -12,13 +12,16 @@ import { signinSchema } from "../schemas/signin";
 
 export const signup: RequestHandler = async (req, res) => {
   const safeData = signupSchema.safeParse(req.body);
-  if (!safeData.success)
+  if (!safeData.success) {
     return res.json({ error: safeData.error.flatten().fieldErrors });
+  }
 
   const { name, lastName, email, password } = safeData.data;
 
   const hasEmail = await findUserByEmail(email);
-  if (hasEmail) return res.json({ error: "E-mail já existe" });
+  if (hasEmail) {
+    return res.json({ error: "E-mail já existe" });
+  }
 
   let genSlug = true;
   let userSlug = slug(`${name} ${lastName}`);
@@ -59,16 +62,21 @@ export const signup: RequestHandler = async (req, res) => {
 
 export const signin: RequestHandler = async (req, res) => {
   const safeData = signinSchema.safeParse(req.body);
-  if (!safeData.success)
+  if (!safeData.success) {
     return res.json({ error: safeData.error.flatten().fieldErrors });
+  }
 
   const { email, password } = safeData.data;
 
   const user = await findUserByEmail(email);
-  if (!user) return res.status(401).json({ error: "Acesso negado!" });
+  if (!user) {
+    return res.status(401).json({ error: "Acesso negado!" });
+  }
 
   const verifyPassword = await compare(password, user.password);
-  if (!verifyPassword) return res.status(401).json({ error: "Acesso negado!" });
+  if (!verifyPassword) {
+    return res.status(401).json({ error: "Acesso negado!" });
+  }
 
   const token = createToken(user.username);
 

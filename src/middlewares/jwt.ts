@@ -9,21 +9,28 @@ export const verifyToken = (
   next: NextFunction
 ) => {
   const authorization = req.headers.authorization;
-  if (!authorization) return res.status(401).json({ error: "Não autorizado." });
+  if (!authorization) {
+    return res.status(401).json({ error: "Não autorizado." });
+  }
 
   const [authType, token] = authorization.split(" ");
 
-  if (authType !== "Bearer" || !token)
+  if (authType !== "Bearer" || !token) {
     return res.status(401).json({ error: "Não autorizado." });
+  }
 
   jwt.verify(
     token,
     process.env.JWT_SECRET as string,
     async (error, decoded: any) => {
-      if (error) return res.status(401).json({ error: "Não autorizado." });
+      if (error) {
+        return res.status(401).json({ error: "Não autorizado." });
+      }
 
       const user = await findUserByUsername(decoded.username);
-      if (!user) return res.status(401).json({ error: "Não autorizado." });
+      if (!user) {
+        return res.status(401).json({ error: "Não autorizado." });
+      }
 
       req.username = user.username;
       next();
