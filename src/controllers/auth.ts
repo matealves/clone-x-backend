@@ -7,7 +7,7 @@ import {
 } from "../services/user";
 import slug from "slug";
 import { compare, hash } from "bcrypt-ts";
-import { createJWT } from "../utils/jwt";
+import { createToken } from "../utils/jwt";
 import { signinSchema } from "../schemas/signin";
 
 export const signup: RequestHandler = async (req, res) => {
@@ -44,7 +44,7 @@ export const signup: RequestHandler = async (req, res) => {
     password: hashPassword,
   });
 
-  const token = createJWT(userSlug);
+  const token = createToken(userSlug);
 
   res.status(201).json({
     token,
@@ -70,7 +70,7 @@ export const signin: RequestHandler = async (req, res) => {
   const verifyPassword = await compare(password, user.password);
   if (!verifyPassword) return res.status(401).json({ error: "Acesso negado!" });
 
-  const token = createJWT(user.username);
+  const token = createToken(user.username);
 
   res.json({
     token,

@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { findUserByUsername } from "../services/user";
 import { ExtendedRequest } from "../types/extended-request";
 
-export const verifyJWT = (
+export const verifyToken = (
   req: ExtendedRequest,
   res: Response,
   next: NextFunction
