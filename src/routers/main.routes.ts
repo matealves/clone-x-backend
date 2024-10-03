@@ -5,19 +5,19 @@ import * as pingController from "../controllers/ping";
 import * as authController from "../controllers/auth";
 import * as tweetController from "../controllers/tweet";
 
-export const mainRouter = Router();
+export const router = Router();
 
 // test
-mainRouter.get("/ping", pingController.ping);
-mainRouter.get("/privateping", verifyToken, pingController.privatePing);
+router.get("/ping", pingController.ping);
+router.get("/privateping", verifyToken, pingController.privatePing);
 
 // auth
-mainRouter.post("/auth/signup", authController.signup);
-mainRouter.post("/auth/signin", authController.signin);
+router.post("/auth/signup", authController.signup);
+router.post("/auth/signin", authController.signin);
 
 // tweet
-mainRouter.post("/tweet", verifyToken, tweetController.addTweet);
-// mainRouter.get("/tweet/:id");
+router.post("/tweet", verifyToken, tweetController.addTweet);
+router.get("/tweet/:id", verifyToken, tweetController.getTweet);
 // mainRouter.get("/tweet/:id/answers");
 // mainRouter.post("/tweet/:id/like");
 
