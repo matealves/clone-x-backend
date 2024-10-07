@@ -18,19 +18,19 @@ router.post("/auth/signin", authController.signin);
 // tweet
 router.post("/tweet", verifyToken, tweetController.addTweet);
 router.get("/tweet/:id", verifyToken, tweetController.getTweet);
-// mainRouter.get("/tweet/:id/answers");
-// mainRouter.post("/tweet/:id/like");
+router.get("/tweet/:id/answers");
+// router.post("/tweet/:id/like");
 
 // user
-// mainRouter.get("/user/:username");
-// mainRouter.get("/user/:username/tweets");
-// mainRouter.post("/user/:username/follow");
-// mainRouter.put("/user");
-// mainRouter.put("/user/avatar");
-// mainRouter.put("/user/cover");
+// router.get("/user/:username");
+// router.get("/user/:username/tweets");
+// router.post("/user/:username/follow");
+// router.put("/user");
+// router.put("/user/avatar");
+// router.put("/user/cover");
 
 // general
-// mainRouter.get("/feed");
-// mainRouter.get("/search");
-// mainRouter.get("/trending");
-// mainRouter.get("/suggestions");
+// router.get("/feed");
+// router.get("/search");
+// router.get("/trending");
+// router.get("/suggestions");
