@@ -18,7 +18,7 @@ router.post("/auth/signin", authController.signin);
 // tweet
 router.post("/tweet", verifyToken, tweetController.addTweet);
 router.get("/tweet/:id", verifyToken, tweetController.getTweet);
-router.get("/tweet/:id/answers");
+router.get("/tweet/:id/answers", verifyToken, tweetController.getAnswers);
 // router.post("/tweet/:id/like");
 
 // user

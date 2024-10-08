@@ -36,3 +36,28 @@ export const createTweet = async (
     },
   });
 };
+
+export const findAnswersFromTweet = async (id: number) => {
+  const tweets = await prisma.tweet.findMany({
+    include: {
+      user: {
+        select: {
+          name: true,
+          lastName: true,
+          avatar: true,
+          username: true,
+        },
+      },
+      likes: { select: { userId: true } },
+    },
+    where: { answerOf: id },
+  });
+
+  for (let tweetIndex in tweets) {
+    tweets[tweetIndex].user.avatar = getPublicURL(
+      tweets[tweetIndex].user.avatar
+    );
+  }
+
+  return tweets;
+};
