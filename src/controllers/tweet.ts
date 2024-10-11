@@ -76,9 +76,9 @@ export const likeToggle = async (req: ExtendedRequest, res: Response) => {
 
   if (!liked) {
     likeTweet(req.username as string, parseInt(id));
-    res.json({ like: true });
+    res.json({ liked: true });
   } else {
     unlikeTweet(req.username as string, parseInt(id));
-    res.json({ action: false });
+    res.json({ liked: false });
   }
 };
