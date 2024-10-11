@@ -22,7 +22,7 @@ export const addTweet = async (req: ExtendedRequest, res: Response) => {
   if (answerOf) {
     const hasAnswerTweet = await findTweet(parseInt(answerOf));
     if (!hasAnswerTweet) {
-      return res.json({ error: "Tweet original não encontrado." });
+      return res.status(404).json({ error: "Tweet original não encontrado." });
     }
   }
 
