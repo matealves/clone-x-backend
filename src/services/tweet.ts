@@ -61,3 +61,29 @@ export const findAnswersFromTweet = async (id: number) => {
 
   return tweets;
 };
+
+export const checkIfTweetIsLikedByUser = async (
+  username: string,
+  id: number
+) => {
+  const isLiked = await prisma.tweetLike.findFirst({
+    where: {
+      userId: username,
+      tweetId: id,
+    },
+  });
+
+  return !!isLiked;
+};
+
+export const likeTweet = async (username: string, id: number) => {
+  await prisma.tweetLike.create({
+    data: { userId: username, tweetId: id },
+  });
+};
+
+export const unlikeTweet = async (username: string, id: number) => {
+  await prisma.tweetLike.deleteMany({
+    where: { userId: username, tweetId: id },
+  });
+};

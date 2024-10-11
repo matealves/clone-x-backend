@@ -19,7 +19,7 @@ router.post("/auth/signin", authController.signin);
 router.post("/tweet", verifyToken, tweetController.addTweet);
 router.get("/tweet/:id", verifyToken, tweetController.getTweet);
 router.get("/tweet/:id/answers", verifyToken, tweetController.getAnswers);
-// router.post("/tweet/:id/like");
+router.post("/tweet/:id/like", verifyToken, tweetController.likeToggle);
 
 // user
 // router.get("/user/:username");
