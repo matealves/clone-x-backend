@@ -104,3 +104,13 @@ export const unfollow = async (username: string, username2: string) => {
     where: { user: username, followedUser: username2 },
   });
 };
+
+export const updateUserInfo = async (
+  username: string,
+  data: Prisma.UserUpdateInput
+) => {
+  await prisma.user.update({
+    where: { username },
+    data,
+  });
+};
