@@ -2,6 +2,20 @@ import { Prisma } from "@prisma/client";
 import { prisma } from "../utils/prisma";
 import { getPublicURL } from "../utils/url";
 
+export const findAllUsers = async () => {
+  return await prisma.user.findMany({
+    select: {
+      username: true,
+      name: true,
+      lastName: true,
+      avatar: true,
+      cover: true,
+      bio: true,
+      link: true,
+    },
+  });
+};
+
 export const findUserByEmail = async (email: string) => {
   const user = await prisma.user.findFirst({
     where: { email },
@@ -68,5 +82,25 @@ export const getUserFollowersCount = async (username: string) => {
 export const getUserTweetCount = async (username: string) => {
   return await prisma.tweet.count({
     where: { userId: username },
+  });
+};
+
+export const checkIfFollows = async (username: string, username2: string) => {
+  const follows = await prisma.follow.findFirst({
+    where: { user: username, followedUser: username2 },
+  });
+
+  return !!follows;
+};
+
+export const follow = async (username: string, username2: string) => {
+  await prisma.follow.create({
+    data: { user: username, followedUser: username2 },
+  });
+};
+
+export const unfollow = async (username: string, username2: string) => {
+  await prisma.follow.deleteMany({
+    where: { user: username, followedUser: username2 },
   });
 };

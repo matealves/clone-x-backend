@@ -23,9 +23,10 @@ router.get("/tweet/:id/answers", verifyToken, tweetController.getAnswers);
 router.post("/tweet/:id/like", verifyToken, tweetController.likeToggle);
 
 // user
+router.get("/user/", userController.getUsers);
 router.get("/user/:username", verifyToken, userController.getUser);
-router.get("/user/:username/tweets",verifyToken, userController.getUserTweets);
-// router.post("/user/:username/follow");
+router.get("/user/:username/tweets", verifyToken, userController.getUserTweets);
+router.post("/user/:username/follow", verifyToken, userController.followToggle);
 // router.put("/user");
 // router.put("/user/avatar");
 // router.put("/user/cover");
