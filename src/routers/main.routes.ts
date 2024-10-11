@@ -24,7 +24,7 @@ router.post("/tweet/:id/like", verifyToken, tweetController.likeToggle);
 
 // user
 router.get("/user/:username", verifyToken, userController.getUser);
-// router.get("/user/:username/tweets");
+router.get("/user/:username/tweets",verifyToken, userController.getUserTweets);
 // router.post("/user/:username/follow");
 // router.put("/user");
 // router.put("/user/avatar");
