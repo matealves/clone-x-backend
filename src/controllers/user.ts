@@ -57,9 +57,7 @@ export const followToggle = async (req: ExtendedRequest, res: Response) => {
     return res.status(404).json({ error: "Usuário não encontrado." });
 
   if (userLogged === username)
-    return res
-      .status(400)
-      .json({ error: "Usuário não pode seguir a sí próprio." });
+    return res.status(400).json({ error: "Não é possível seguir você mesmo." });
 
   const follows = await checkIfFollows(userLogged, username);
 
