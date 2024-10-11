@@ -4,6 +4,7 @@ import { verifyToken } from "../middlewares/jwt";
 import * as pingController from "../controllers/ping";
 import * as authController from "../controllers/auth";
 import * as tweetController from "../controllers/tweet";
+import * as userController from "../controllers/user";
 
 export const router = Router();
 
@@ -22,7 +23,7 @@ router.get("/tweet/:id/answers", verifyToken, tweetController.getAnswers);
 router.post("/tweet/:id/like", verifyToken, tweetController.likeToggle);
 
 // user
-// router.get("/user/:username");
+router.get("/user/:username", verifyToken, userController.getUser);
 // router.get("/user/:username/tweets");
 // router.post("/user/:username/follow");
 // router.put("/user");
