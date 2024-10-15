@@ -135,6 +135,9 @@ export const getUserSuggestions = async (username: string) => {
   const following = await getUserFollowing(username);
   const followingPlusMe = [...following, username];
 
+  console.log("following:", following);
+  console.log("Prisma.join:", Prisma.join(followingPlusMe));
+
   type Suggestion = Pick<
     Prisma.UserGetPayload<Prisma.UserDefaultArgs>,
     "name" | "lastName" | "avatar" | "username"
@@ -143,7 +146,7 @@ export const getUserSuggestions = async (username: string) => {
   const suggestions: Suggestion[] = await prisma.$queryRaw`
   SELECT name, "lastName", avatar, username
     FROM "User"
-    WHERE username NOT IN (${followingPlusMe.join(",")})
+    WHERE username NOT IN (${Prisma.join(followingPlusMe)})
     ORDER BY RANDOM()
     LIMIT 2;
   `;
