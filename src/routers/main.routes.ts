@@ -6,6 +6,7 @@ import * as authController from "../controllers/auth";
 import * as tweetController from "../controllers/tweet";
 import * as userController from "../controllers/user";
 import * as feedController from "../controllers/feed";
+import * as searchController from "../controllers/search";
 
 export const router = Router();
 
@@ -34,6 +35,6 @@ router.put("/user", verifyToken, userController.updateUser);
 
 // general
 router.get("/feed", verifyToken, feedController.getFeed);
-// router.get("/search");
+router.get("/search", verifyToken, searchController.searchTweets);
 // router.get("/trending");
 // router.get("/suggestions");
