@@ -8,6 +8,7 @@ import * as userController from "../controllers/user";
 import * as feedController from "../controllers/feed";
 import * as searchController from "../controllers/search";
 import * as trendController from "../controllers/trend";
+import * as suggestionController from "../controllers/suggestion";
 
 export const router = Router();
 
@@ -38,4 +39,4 @@ router.put("/user", verifyToken, userController.updateUser);
 router.get("/feed", verifyToken, feedController.getFeed);
 router.get("/search", verifyToken, searchController.searchTweets);
 router.get("/trending", verifyToken, trendController.getTrends);
-// router.get("/suggestions");
+router.get("/suggestions", verifyToken, suggestionController.getSuggestions);
