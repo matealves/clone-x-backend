@@ -8,10 +8,12 @@ export const findAllUsers = async () => {
       username: true,
       name: true,
       lastName: true,
+      email: true,
       avatar: true,
       cover: true,
       bio: true,
       link: true,
+      createdAt: true,
     },
   });
 };
@@ -113,4 +115,18 @@ export const updateUserInfo = async (
     where: { username },
     data,
   });
+};
+
+export const getUserFollowing = async (username: string) => {
+  const following = [];
+  const reqFollow = await prisma.follow.findMany({
+    select: { followedUser: true },
+    where: { user: username },
+  });
+
+  for (let reqItem of reqFollow) {
+    following.push(reqItem.followedUser);
+  }
+
+  return following;
 };
