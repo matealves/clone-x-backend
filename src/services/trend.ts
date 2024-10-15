@@ -16,3 +16,11 @@ export const addHashtag = async (hashtag: string) => {
     });
   }
 };
+
+export const getTrending = async () => {
+  return await prisma.trend.findMany({
+    select: { hashtag: true, count: true },
+    orderBy: { count: "desc" },
+    take: 4,
+  });
+};
